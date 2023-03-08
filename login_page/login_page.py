@@ -2,8 +2,8 @@ from selenium import webdriver
 from page import Page
 
 class LoginPage(Page):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, browser):
+        super().__init__(browser=browser)
         self.browser.get('https://www.saucedemo.com/')
 
 
