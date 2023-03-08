@@ -1,4 +1,4 @@
-from login_page.login_page import LoginPage
+from pages.login_page import LoginPage
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
