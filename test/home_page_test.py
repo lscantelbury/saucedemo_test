@@ -11,10 +11,22 @@ class HomePageTest(unittest.TestCase):
     def setUp(self):
         self.service = Service(ChromeDriverManager().install())
         self.browser = webdriver.Chrome(service=self.service)
+
+        self.browser.get('https://www.saucedemo.com/')
+
+        username_textfield = self.browser.find_element(By.XPATH, '//*[@id="user-name"]')
+        username_textfield.send_keys('standard_user')
+
+        password_textfield = self.browser.find_element(By.XPATH, '//*[@id="password"]')
+        password_textfield.send_keys('secret_sauce')
+
+        login_button = self.browser.find_element(By.XPATH, '//*[@id="login-button"]')
+        login_button.click()
+
         self.home_page = HomePage(browser=self.browser)
 
     def test_products_are_visible(self):
-        products = self.home_page.inventory_items
+        products = self.home_page.inventory_items()
 
         self.assertTrue(products.is_displayed())
 
