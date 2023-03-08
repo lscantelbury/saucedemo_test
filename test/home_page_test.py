@@ -1,6 +1,6 @@
 from pages.home_page import HomePage
 from selenium.webdriver.common.by import By
-from pages.login_page import LoginPage
+from resources.home_page_locators import HomePageLocators
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -31,7 +31,7 @@ class HomePageTest(unittest.TestCase):
         self.assertTrue(products.is_displayed())
 
     def test_menu_toggle(self):
-        menu = self.home_page.browser.find_element(By.XPATH, '//*[@id="menu_button_container"]/div/div[2]')
+        menu = self.home_page.browser.find_element(By.XPATH, HomePageLocators.menu)
 
         hidden = lambda : menu.get_attribute('aria-hidden') == 'true'
         
@@ -44,7 +44,7 @@ class HomePageTest(unittest.TestCase):
     def test_add_to_cart(self):
         self.home_page.click_add_to_cart_button()
 
-        amount_of_items = self.browser.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a/span')
+        amount_of_items = self.browser.find_element(By.XPATH, HomePageLocators.amount_of_items_at_cart)
 
         self.assertTrue(amount_of_items.is_displayed())
 
@@ -52,7 +52,7 @@ class HomePageTest(unittest.TestCase):
 
         self.home_page.click_sort_button(option=1)
 
-        first_inventory_item = lambda : self.browser.find_element('xpath', '//*[@id="inventory_container"]/div/div[1]/div[2]/div[1]/a/div').text
+        first_inventory_item = lambda : self.browser.find_element(By.XPATH, HomePageLocators.first_inventory_item).text
 
         self.assertEqual(first_inventory_item(), 'Sauce Labs Backpack')
 
