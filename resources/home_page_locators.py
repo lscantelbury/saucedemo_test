@@ -9,3 +9,4 @@ class HomePageLocators:
     sort_button =  'product_sort_container'
     selected_option = lambda option : f'''//*[@id="header_container"]/div[2]/div/span/select/option[{option}]'''
     add_to_cart_button =  '//*[@id="add-to-cart-sauce-labs-backpack"]'
+    products_label =  '//*[@id="header_container"]/div[2]/span'
