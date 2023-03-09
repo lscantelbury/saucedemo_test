@@ -57,6 +57,26 @@ class CartPageTest(unittest.TestCase):
 
         self.assertFalse(checkout_complete_label.is_displayed())
 
+    def test_textfield_validation(self):
+        self.home_page.click_cart_button()
 
+        cart_page = CartPage(self.browser)
+
+        cart_page.click_checkout_button()
+
+        error_label = lambda : self.browser.find_element(By.XPATH, CartPageLocators.error_label)
+
+        cart_page.click_continue_button()
+
+        self.assertTrue(error_label().is_displayed())
+
+        cart_page.set_firstname_textfield('First')
+        cart_page.set_last_textfield('Last')
+
+        cart_page.click_continue_button()
+
+        self.assertTrue(error_label().is_displayed())
+
+        
 if __name__ == '__name__':
     unittest.main()

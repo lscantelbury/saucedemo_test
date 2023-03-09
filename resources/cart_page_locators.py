@@ -13,3 +13,4 @@ class CartPageLocators:
     total_price = '//*[@id="checkout_summary_container"]/div/div[2]/div[8]'
     finish_button = '//*[@id="finish"]'
     checkout_complete_label = '//*[@id="header_container"]/div[2]/span'
+    error_label = '//*[@id="checkout_info_container"]/div/form/div[1]/div[4]'
