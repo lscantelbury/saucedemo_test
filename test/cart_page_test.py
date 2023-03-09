@@ -1,4 +1,5 @@
 from pages.home_page import HomePage
+from pages.cart_page import CartPage
 from selenium.webdriver.common.by import By
 from resources.home_page_locators import HomePageLocators
 from resources.login_page_locators import LoginPageLocators
@@ -36,6 +37,25 @@ class CartPageTest(unittest.TestCase):
         item_at_cart = self.browser.find_element(By.XPATH, CartPageLocators.item_at_cart_name).text
 
         self.assertEqual(first_inventory_item_name, item_at_cart)
+
+    def test_checkout_with_empty_cart(self):
+        self.home_page.click_cart_button()
+
+        cart_page = CartPage(self.browser)
+
+        cart_page.click_checkout_button()
+
+        cart_page.set_firstname_textfield('First')
+        cart_page.set_last_textfield('Last')
+        cart_page.set_zip_textfield('123')
+
+        cart_page.click_continue_button()
+
+        cart_page.click_finish_button()
+
+        checkout_complete_label = self.browser.find_element(By.XPATH, CartPageLocators.checkout_complete_label)
+
+        self.assertFalse(checkout_complete_label.is_displayed())
 
 
 if __name__ == '__name__':
