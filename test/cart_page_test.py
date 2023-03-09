@@ -1,3 +1,4 @@
+import re
 from pages.home_page import HomePage
 from pages.cart_page import CartPage
 from selenium.webdriver.common.by import By
@@ -76,6 +77,32 @@ class CartPageTest(unittest.TestCase):
         cart_page.click_continue_button()
 
         self.assertTrue(error_label().is_displayed())
+
+    def test_price_is_correct(self):
+        self.home_page.click_add_to_cart_button()
+        self.home_page.click_cart_button()
+
+        cart_page = CartPage(self.browser)
+
+        cart_page.click_checkout_button()
+
+        cart_page.set_firstname_textfield('First')
+        cart_page.set_last_textfield('Last')
+        cart_page.set_zip_textfield('123')
+
+        cart_page.click_continue_button()
+
+        item_price = self.browser.find_element(By.XPATH, CartPageLocators.item_price).text
+        item_price = float(re.findall(r'\d+\.\d+', item_price)[0])
+
+        tax_price = self.browser.find_element(By.XPATH, CartPageLocators.tax_price).text
+        tax_price = float(re.findall(r'\d+\.\d+', tax_price)[0])
+
+        total_price = self.browser.find_element(By.XPATH, CartPageLocators.total_price).text
+        total_price = float(re.findall(r'\d+\.\d+', total_price)[0])
+
+        self.assertEqual((item_price + tax_price),total_price)
+        
 
         
 if __name__ == '__name__':
