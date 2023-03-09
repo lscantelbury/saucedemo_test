@@ -1,4 +1,4 @@
-from page import Page
+from pages.page import Page
 from resources.home_page_locators import HomePageLocators
 from selenium.webdriver.common.by import By
 

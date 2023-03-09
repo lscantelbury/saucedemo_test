@@ -1,7 +1,7 @@
 from selenium import webdriver
 from resources.login_page_locators import LoginPageLocators
 from selenium.webdriver.common.by import By
-from page import Page
+from pages.page import Page
 
 class LoginPage(Page):
     def __init__(self, browser):

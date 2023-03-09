@@ -1,4 +1,4 @@
-from page import Page
+from pages.page import Page
 from resources.cart_page_locators import CartPageLocators
 from selenium.webdriver.common.by import By
 
