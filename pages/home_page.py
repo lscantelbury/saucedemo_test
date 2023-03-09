@@ -21,4 +21,8 @@ class HomePage(Page):
     def click_add_to_cart_button(self):
         add_to_cart_button = self.browser.find_element(By.XPATH, HomePageLocators.add_to_cart_button)
         add_to_cart_button.click()
+
+    def click_cart_button(self):
+        cart_button = self.browser.find_element(By.XPATH, HomePageLocators.cart_button)
+        cart_button.click()
     

@@ -1,11 +1,11 @@
 from pages.home_page import HomePage
 from selenium.webdriver.common.by import By
 from resources.home_page_locators import HomePageLocators
+from resources.login_page_locators import LoginPageLocators
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import unittest
-from time import sleep
 
 class HomePageTest(unittest.TestCase):
     def setUp(self):
@@ -14,13 +14,13 @@ class HomePageTest(unittest.TestCase):
 
         self.browser.get('https://www.saucedemo.com/')
 
-        username_textfield = self.browser.find_element(By.XPATH, '//*[@id="user-name"]')
+        username_textfield = self.browser.find_element(By.XPATH, LoginPageLocators.username_textfield)
         username_textfield.send_keys('standard_user')
 
-        password_textfield = self.browser.find_element(By.XPATH, '//*[@id="password"]')
+        password_textfield = self.browser.find_element(By.XPATH, LoginPageLocators.password_textfield)
         password_textfield.send_keys('secret_sauce')
 
-        login_button = self.browser.find_element(By.XPATH, '//*[@id="login-button"]')
+        login_button = self.browser.find_element(By.XPATH, LoginPageLocators.login_button)
         login_button.click()
 
         self.home_page = HomePage(browser=self.browser)
